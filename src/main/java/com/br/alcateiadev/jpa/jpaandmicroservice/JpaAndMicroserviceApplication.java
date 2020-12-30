@@ -2,6 +2,8 @@ package com.br.alcateiadev.jpa.jpaandmicroservice;
 
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaEntity;
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaFilhosEntity;
+import com.br.alcateiadev.jpa.jpaandmicroservice.service.AlterarFamiliaService;
+import com.br.alcateiadev.jpa.jpaandmicroservice.service.DeletarFamiliaService;
 import com.br.alcateiadev.jpa.jpaandmicroservice.service.IncluirFamiliaService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class JpaAndMicroserviceApplication implements ApplicationRunner {
 
     @Autowired
     private IncluirFamiliaService incluirFamiliaService;
+
+    @Autowired
+    private AlterarFamiliaService alterarFamiliaService;
+
+    @Autowired
+    private DeletarFamiliaService deletarFamiliaService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -58,5 +66,15 @@ public class JpaAndMicroserviceApplication implements ApplicationRunner {
         familia.setFilhos(listFilhos);
 
         incluirFamiliaService.execute(familia);
+
+        FamiliaEntity familiaAlteracao = FamiliaEntity
+                .builder()
+                .id(familia.getId())
+                .nome("Familia Vieira novo")
+                .build();
+
+        alterarFamiliaService.execute(familiaAlteracao);
+
+        deletarFamiliaService.execute(familiaAlteracao.getId());
     }
 }

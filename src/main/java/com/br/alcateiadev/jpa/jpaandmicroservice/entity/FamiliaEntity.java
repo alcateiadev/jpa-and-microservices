@@ -23,6 +23,6 @@ public class FamiliaEntity {
     @Column(name = "nome", length = 500)
     private String nome;
 
-    @OneToMany(mappedBy = "familia", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "familia")
     private List<FamiliaFilhosEntity> filhos;
 }
