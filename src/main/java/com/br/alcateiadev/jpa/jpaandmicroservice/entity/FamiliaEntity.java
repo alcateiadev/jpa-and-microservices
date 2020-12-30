@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "familia_tabela")
@@ -21,4 +22,7 @@ public class FamiliaEntity {
 
     @Column(name = "nome", length = 500)
     private String nome;
+
+    @OneToMany(mappedBy = "familia", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<FamiliaFilhosEntity> filhos;
 }

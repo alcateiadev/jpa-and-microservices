@@ -22,7 +22,7 @@ public class FamiliaFilhosEntity {
     @Column(name = "nome", length = 500)
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "familia_id", nullable = false)
     private FamiliaEntity familia;
 }

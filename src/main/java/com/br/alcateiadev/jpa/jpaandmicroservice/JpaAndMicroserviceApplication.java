@@ -1,5 +1,7 @@
 package com.br.alcateiadev.jpa.jpaandmicroservice;
 
+import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaEntity;
+import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaFilhosEntity;
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.NomeEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @Log4j2
@@ -26,25 +30,36 @@ public class JpaAndMicroserviceApplication implements ApplicationRunner {
 	@Transactional
 	public void run(ApplicationArguments args) throws Exception {
 
-		log.info("Gravando nome....");
-		NomeEntity nome = NomeEntity
+		FamiliaEntity familia = FamiliaEntity
 				.builder()
-				.nome("Marcelo")
-				.sobrenome("Vieira")
-				.idade(39L)
-				.renda(1000F)
+				.nome("Familia Vieira")
 				.build();
 
-		entityManager.persist(nome);
+		List<FamiliaFilhosEntity> listFilhos = new ArrayList<>();
 
-		nome = NomeEntity
+		listFilhos.add( FamiliaFilhosEntity
 				.builder()
-				.nome("Marcelo 2")
-				.idade(39L)
-				.build();
+				.nome("Filho 1")
+				.familia(familia)
+				.build()
+		);
 
-		entityManager.persist(nome);
+		listFilhos.add( FamiliaFilhosEntity
+				.builder()
+				.nome("Filho 2")
+				.familia(familia)
+				.build()
+		);
 
-		log.info("Nome 2 gravado");
+		listFilhos.add( FamiliaFilhosEntity
+				.builder()
+				.nome("Filho 3")
+				.familia(familia)
+				.build()
+		);
+
+		familia.setFilhos(listFilhos);
+
+		entityManager.persist(familia);
 	}
 }
