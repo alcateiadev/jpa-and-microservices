@@ -2,9 +2,10 @@ package com.br.alcateiadev.jpa.jpaandmicroservice;
 
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaEntity;
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaFilhosEntity;
-import com.br.alcateiadev.jpa.jpaandmicroservice.service.AlterarFamiliaService;
-import com.br.alcateiadev.jpa.jpaandmicroservice.service.DeletarFamiliaService;
-import com.br.alcateiadev.jpa.jpaandmicroservice.service.IncluirFamiliaService;
+import com.br.alcateiadev.jpa.jpaandmicroservice.repository.FamiliaRepository;
+import com.br.alcateiadev.jpa.jpaandmicroservice.service.familia.AlterarFamiliaService;
+import com.br.alcateiadev.jpa.jpaandmicroservice.service.familia.DeletarFamiliaService;
+import com.br.alcateiadev.jpa.jpaandmicroservice.service.familia.IncluirFamiliaService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -30,7 +31,7 @@ public class JpaAndMicroserviceApplication implements ApplicationRunner {
     private AlterarFamiliaService alterarFamiliaService;
 
     @Autowired
-    private DeletarFamiliaService deletarFamiliaService;
+    private FamiliaRepository familiaRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -75,6 +76,7 @@ public class JpaAndMicroserviceApplication implements ApplicationRunner {
 
         alterarFamiliaService.execute(familiaAlteracao);
 
-        deletarFamiliaService.execute(familiaAlteracao.getId());
+        familiaRepository.findNameObjById(familia.getId());
+        familiaRepository.findNameNativeById(familia.getId());
     }
 }

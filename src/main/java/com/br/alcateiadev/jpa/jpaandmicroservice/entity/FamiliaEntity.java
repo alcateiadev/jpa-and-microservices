@@ -25,4 +25,8 @@ public class FamiliaEntity {
 
     @OneToMany(mappedBy = "familia")
     private List<FamiliaFilhosEntity> filhos;
+
+    public FamiliaEntity(String nome){
+        this.nome = nome;
+    }
 }

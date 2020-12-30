@@ -1,4 +1,4 @@
-package com.br.alcateiadev.jpa.jpaandmicroservice.service;
+package com.br.alcateiadev.jpa.jpaandmicroservice.service.familia;
 
 import com.br.alcateiadev.jpa.jpaandmicroservice.entity.FamiliaEntity;
 import com.br.alcateiadev.jpa.jpaandmicroservice.repository.FamiliaRepository;
